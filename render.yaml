@@ -1,0 +1,20 @@
+previewsEnabled: true
+services:
+- type: web
+  name: real-reddit-client
+  branch: main
+  env: static
+  buildCommand: cd client && ./render-build.sh
+  staticPublishPath: ./client/build/
+  buildFilter:
+    paths:
+    - client/**
+- type: web
+  name: real-reddit-server
+  branch: main
+  env: node
+  buildCommand: cd server && ./render-build.sh
+  startCommand: cd server && ./render-start.sh
+  buildFilter:
+    paths:
+    - server/**
