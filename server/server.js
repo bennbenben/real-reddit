@@ -14,7 +14,7 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
+app.get('/hello-world', (req, res) => {
   res.send("Hello World 👋");
 });
 

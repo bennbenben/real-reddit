@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
 
     const checkApiResponse = async () => {
-      const response = await axios.get("https://real-reddit-server.onrender.com");
+      const response = await axios.get("https://real-reddit-server.onrender.com/hello-world");
       console.log("response is: {}", response); 
     }
 
