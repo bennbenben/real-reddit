@@ -15,6 +15,11 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send("Hello World 👋");
+});
+
+// Test API for FE
 app.get("/hello-world", (req, res) => {
   res.send("Hello World 👋");
 });
