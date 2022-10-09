@@ -8,6 +8,12 @@ const HOST = '0.0.0.0';
 
 // App
 const app = express();
+app.use(
+  cors({
+    origin: "https://real-reddit-client.onrender.com",
+  })
+);
+
 app.get('/', (req, res) => {
   res.send("Hello World 👋");
 });
