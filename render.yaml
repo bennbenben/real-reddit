@@ -6,7 +6,6 @@ services:
   repo: https://github.com/bennbenben/real-reddit.git
   branch: main
   plan: free
-  region: singapore
   buildCommand: cd client && ./render-build.sh
   staticPublishPath: ./client/build/
   buildFilter:
