@@ -9,3 +9,12 @@ services:
   buildFilter:
     paths:
     - server/**
+- type: web
+  name: real-reddit-client
+  env: static
+  branch: main
+  buildCommand: cd client && ./render-build.sh
+  staticPublishPath: ./client/build/
+  buildFilter:
+    paths:
+    - client/**
