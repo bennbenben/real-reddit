@@ -7,11 +7,11 @@ const HOST = "0.0.0.0";
 
 // Configs
 const app = express();
-// app.use(
-//   cors({
-//     origin: "https://real-reddit-client.onrender.com",
-//   })
-// );
+app.use(
+  cors({
+    origin: "https://real-reddit-client.onrender.com",
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello World 👋");
