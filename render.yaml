@@ -2,8 +2,9 @@ previewsEnabled: true
 services:
 - type: web
   name: real-reddit-client
-  branch: main
   env: static
+  repo: https://github.com/bennbenben/real-reddit.git
+  branch: main
   buildCommand: cd client && ./render-build.sh
   staticPublishPath: ./client/build/
   buildFilter:
@@ -11,10 +12,14 @@ services:
     - client/**
 - type: web
   name: real-reddit-server
-  branch: main
   env: node
+  repo: https://github.com/bennbenben/real-reddit.git
+  branch: main
+  plan: free
+  healthCheckPath: /healthz
   buildCommand: cd server && ./render-build.sh
   startCommand: cd server && ./render-start.sh
   buildFilter:
     paths:
     - server/**
+  

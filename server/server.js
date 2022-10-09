@@ -18,10 +18,11 @@ app.get("/", (req, res) => {
 });
 
 // Health Check
-app.get("/health-check", (req, res) => {
-  res.send("Server is healthy");
+app.get("/healthz", (req, res) => {
+  res.status(200).send("OK");
 });
 
+// App listen
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
