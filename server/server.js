@@ -1,10 +1,11 @@
 'use strict';
 
-const express = require('express');
+const express = require("express");
+const cors = require("cors");
 
 // Constants
 const PORT = 8080;
-const HOST = '0.0.0.0';
+const HOST = "0.0.0.0";
 
 // App
 const app = express();
@@ -14,12 +15,12 @@ app.use(
   })
 );
 
-app.get('/hello-world', (req, res) => {
+app.get("/hello-world", (req, res) => {
   res.send("Hello World 👋");
 });
 
 // Health Check
-app.get('/health-check', (req, res) => {
+app.get("/health-check", (req, res) => {
   res.send('Server is healthy');
 });
 
