@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 
 // Constants
-const PORT = 8080;
-const HOST = "0.0.0.0";
+const port = process.env.port || 8080;
+// const HOST = "0.0.0.0";
 
 // Configs
 const app = express();
@@ -23,7 +23,7 @@ app.get("/health-check", (req, res) => {
 });
 
 // App listen
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
-
-console.log(`Hello from the app 📦`);
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+  console.log(`Hello from the app 📦`);
+});
