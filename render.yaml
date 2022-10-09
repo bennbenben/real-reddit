@@ -1,16 +1,6 @@
 previewsEnabled: true
 services:
 - type: web
-  name: real-reddit-client
-  env: static
-  repo: https://github.com/bennbenben/real-reddit.git
-  branch: main
-  buildCommand: cd client && ./render-build.sh
-  staticPublishPath: ./client/build/
-  buildFilter:
-    paths:
-    - client/**
-- type: web
   name: real-reddit-server
   env: node
   repo: https://github.com/bennbenben/real-reddit.git
@@ -21,4 +11,3 @@ services:
   buildFilter:
     paths:
     - server/**
-  
