@@ -3,9 +3,7 @@ services:
 - type: web
   name: real-reddit-server
   env: node
-  repo: https://github.com/bennbenben/real-reddit.git
   branch: main
-  plan: free
   buildCommand: cd server && ./render-build.sh
   startCommand: cd server && ./render-start.sh
   buildFilter:
