@@ -5,6 +5,8 @@ services:
   env: static
   repo: https://github.com/bennbenben/real-reddit.git
   branch: main
+  plan: free
+  region: singapore
   buildCommand: cd client && ./render-build.sh
   staticPublishPath: ./client/build/
   buildFilter:
@@ -16,7 +18,7 @@ services:
   repo: https://github.com/bennbenben/real-reddit.git
   branch: main
   plan: free
-  healthCheckPath: /healthz
+  region: singapore
   buildCommand: cd server && ./render-build.sh
   startCommand: cd server && ./render-start.sh
   buildFilter:

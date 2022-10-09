@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 // Health Check
-app.get("/healthz", (req, res) => {
+app.get("/health-check", (req, res) => {
   res.status(200).send("OK");
 });
 
