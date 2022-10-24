@@ -3,6 +3,7 @@ import "./style.css";
 import Header from "./components/Header";
 import BoardHeader from "./components/BoardHeader";
 import PostForm from "./components/PostForm";
+import AuthModal from "./components/AuthModal";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Header />
       <BoardHeader />
       <PostForm />
+      <AuthModal />
 
       <div className="px-6 bg-reddit_dark text-reddit_text">
         <div className="border border-reddit_border bg-reddit_dark-brighter p-2 rounded-md">
