@@ -13,6 +13,7 @@ services:
   name: real-reddit-client
   env: static
   branch: main
+  plan: standard
   buildCommand: cd client && ./render-build.sh
   staticPublishPath: ./client/build/
   buildFilter:
