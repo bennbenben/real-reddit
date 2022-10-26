@@ -15,7 +15,7 @@ const App = () => {
 
   useEffect(() => {
     
-    axios.get("https://real-reddit-server.onrender.com/user", {withCredentials: true})
+    axios.get("http://localhost:8080/user", {withCredentials: true})
       .then(response => {
         console.log("response.data.username is: " + response.data.username);
         setUser(response.data);
@@ -23,7 +23,7 @@ const App = () => {
   }, []);
 
   function logout () {
-    axios.post("https://real-reddit-server.onrender.com/logout", {withCredentials: true})
+    axios.post("http://localhost:8080/logout", {withCredentials: true})
       .then(setUser({}));
   }
 
