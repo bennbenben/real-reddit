@@ -26,11 +26,6 @@ app.use(
   })
 );
 
-function getUserFromToken(token) {
-  const userInfo = jwt.verify(token, process.env.secret);
-  return User.findById(userInfo.id);
-}
-
 await mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
