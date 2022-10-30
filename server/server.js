@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "./models/User.js";
+import Comment from "./models/Comment.js";
 
 // Constants
 const PORT = 8080;
@@ -93,6 +94,22 @@ app.post('/login', (req, res) => {
 
 app.post('/logout', (req, res) => {
   res.cookie('token','').send();
+});
+
+app.get('/comments', (req, res) => {
+  const search = req.query.search;
+  const filters = search
+    ? {body: {$regex: '.*'+search+'.*'}}
+    : {rootId:null};
+  Comment.find(filters).sort({postedAt: -1}).then(comments => {
+    res.json(comments);
+  });
+});
+
+app.get('/comments/:id', (req, res) => {
+  Comment.findById(req.params.id).then(comment => {
+    res.json(comment);
+  });
 });
 
 // Health Check
