@@ -6,6 +6,7 @@ import cors from "cors";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from "./models/User.js";
+import Comment from "./models/Comment.js";
 
 // Jwebtoken secret
 const secret = 'secret123';
@@ -87,11 +88,6 @@ app.get('/user', (req, res) => {
   
 });
 
-// Logout
-app.post('/logout', (req, res) => {
-    res.cookie('token', '').send();
-})
-
 // Login
 app.post('/login', (req, res) => {
     const {username, password} = req.body;
@@ -110,6 +106,27 @@ app.post('/login', (req, res) => {
       }
     });
 });
+
+// Logout
+app.post('/logout', (req, res) => {
+  res.cookie('token', '').send();
+})
+
+// GET Posts
+app.get('/comments', (req, res) => {
+  Comment.find().then(comments => {
+    res.json(comments);
+  });
+});
+
+app.get('/comments/:id', (req, res) => {
+  Comment.findById(req.params.id).then(comment => {
+    res.json(comment);
+  });
+})
+
+
+
 
 // Server running feedback messages
 app.listen(PORT, HOST);
