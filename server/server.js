@@ -60,18 +60,21 @@ app.post("/register", (req, res) => {
   });
 });
 
+const getUserFromToken = (token) => {
+  const userInfo = jwt.verify(token, process.env.secret);
+  return User.findById(userInfo.id);
+}
+
 app.get('/user', (req, res) => {
   const token = req.cookies.token;
-  // console.log({token});
-  const userInfo = jwt.verify(token, process.env.secret)
-    User.findById(userInfo.id)
-      .then(user => {
-        res.json({username:user.username});
-      })
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(500);
-      })
+  getUserFromToken(token)
+    .then(user => {
+      res.json({username:user.username});
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 app.post('/login', (req, res) => {
@@ -111,6 +114,26 @@ app.get('/comments/:id', (req, res) => {
     res.json(comment);
   });
 });
+
+app.post('/comments', (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.sendStatus(401);
+    return;
+  }
+  getUserFromToken(token)
+    .then(userInfo => {
+      const {title, body} = req.body;
+      const comment = new Comment({title,body,author:userInfo.username,postedAt:new Date(),});
+      comment.save().then(savedComment => {
+        res.json(savedComment);
+      }).catch(console.log)
+    })
+    .catch(() => {
+      res.sendStatus(401);
+    })
+  
+})
 
 // Health Check
 app.get("/health-check", (req, res) => {

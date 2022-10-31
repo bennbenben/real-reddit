@@ -10,11 +10,16 @@ const RoutingRoutes = () => {
 
   let location = useLocation();
   console.log(location)
+  
   let commentId = null;
 
   if (location.state && location.state.commentId) {
     location.pathname = "/";
-    commentId = location.state.commentId;
+    if (postOpen) {
+      commentId = location.state.commentId;
+    } else {
+      location.state.commentId = null;
+    }
   }
 
   useEffect(() => {

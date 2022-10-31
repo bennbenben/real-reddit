@@ -5,12 +5,14 @@ import AuthModalContext from "./components/AuthModalContext";
 import UserContext from "./components/UserContext";
 import axios from "axios";
 import Routing from "./components/Routing";
+import PostFormModal from "./components/PostFormModal";
+import PostFormModalContext from "./components/PostFormModalContext";
 
 const App = () => {
 
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showPostFormModal, setShowPostFormModal] = useState(false);
   const [user, setUser] = useState({});
-  
 
   useEffect(() => {
     axios.get("http://localhost:8080/user", {withCredentials: true})
@@ -29,10 +31,11 @@ const App = () => {
 
   return (
     <AuthModalContext.Provider value={{show: showAuthModal, setShow: setShowAuthModal}}>
-      <UserContext.Provider value={{...user, logout, setUser}}>
-        <Routing />
-        <AuthModal />
-      </UserContext.Provider>
+      <PostFormModalContext.Provider value={{show: showPostFormModal, setShow: setShowPostFormModal}}>
+        <UserContext.Provider value={{...user, logout, setUser}}>
+          <Routing />
+        </UserContext.Provider>
+      </PostFormModalContext.Provider>
     </AuthModalContext.Provider>
   );
 };

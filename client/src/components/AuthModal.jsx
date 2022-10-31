@@ -15,6 +15,7 @@ const AuthModal = () => {
   const user = useContext(UserContext);
   const modalContext = useContext(AuthModalContext);
   const visibleClass = modalContext.show !== false ? "block" : "hidden";
+
   if (modalContext.show && modalContext.show !== modalType) {
     setModalType(modalContext.show)
   }
@@ -42,9 +43,9 @@ const AuthModal = () => {
   }
 
   return (
-    <div className={"w-screen h-screen fixed top-0 left-0 z-20 flex content-center " + visibleClass} style={{backgroundColor:'rgba(0,0,0,.6'}}>
+    <div className={"w-screen h-screen fixed top-0 left-0 z-30 flex content-center " + visibleClass} style={{backgroundColor:'rgba(0,0,0,.6'}}>
         <ClickOutHandler onClickOut={() => modalContext.setShow(false)}>
-            <div className="border border-reddit_dark-brightest w-3/4 sm:w-1/2 md:1/4 bg-reddit_dark p-5 text-reddit_text self-center mx-auto rounded-xl">
+            <div className="border border-reddit_dark-brightest w-3/4 md:2/4 bg-reddit_dark p-5 text-reddit_text self-center mx-auto rounded-xl">
                 
                 {modalType === 'login' && (
                     <h1 className="text-2xl mb-5">Login</h1>
