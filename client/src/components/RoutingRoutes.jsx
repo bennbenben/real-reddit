@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from "react-router-dom";
 import Board from "./Board";
 import CommentModal from './CommentModal';
@@ -10,11 +10,16 @@ const RoutingRoutes = () => {
 
   let location = useLocation();
   console.log(location)
-  let commentId = null;
+  const commentId = useRef(null);
+  // let commentId = null;
 
   if (location.state && location.state.commentId) {
     location.pathname = "/";
-    commentId = location.state.commentId;
+    if (postOpen) {
+      commentId.current = location.state.commentId;
+    } else {
+      location.state.commentId = null;
+    }
   }
 
   useEffect(() => {
@@ -22,14 +27,14 @@ const RoutingRoutes = () => {
   }, [commentId]);
 
   useEffect(() => {
-    commentId = null;
+    commentId.current = null;
   }, [postOpen]);
 
   return (
     <div>
-      {commentId && (
+      {commentId.current && (
         <div>
-          <CommentModal id={commentId} open={postOpen} onClickOut={() => setPostOpen(false)} />
+          <CommentModal id={commentId.current} open={postOpen} onClickOut={() => setPostOpen(false)} />
         </div>
       )}
       <Routes location={location}>
@@ -40,4 +45,4 @@ const RoutingRoutes = () => {
   )
 }
 
-export default RoutingRoutes
+export default RoutingRoutes;
