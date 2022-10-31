@@ -1,13 +1,13 @@
 import React from 'react';
 import ClickOutHandler from 'react-clickout-handler';
 import { useState, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import PostFormModalContext from './PostFormModalContext';
 import Button from './Button';
 import Input from './Input';
 import TextArea from './TextArea';
 import AuthModalContext from './AuthModalContext';
+import { CustomNavigate } from './CustomNavigate';
 
 const PostFormModal = () => {
 
@@ -35,7 +35,7 @@ const PostFormModal = () => {
   }
 
   if (newPostId) {
-    return (<Navigate to={"/comments/" + newPostId} />);
+    return (<CustomNavigate to={"/comments/" + newPostId} />);
   }
 
   return (
