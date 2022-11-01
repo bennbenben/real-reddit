@@ -14,9 +14,9 @@ const Comments = (props) => {
   );
 
   return (
-    <div className="">
+    <div className="my-2 text-reddit_text">
       {comments.map((comment) => {
-        const replies = comments.filter(c => c.parentId === comment._id);
+        const replies = props.comments.filter(c => c.parentId === comment._id);
         return (
           <div>
             <div className="flex mb-2">
@@ -29,7 +29,7 @@ const Comments = (props) => {
                 datetime={comment.postedAt}
               />
             </div>
-            <div className={"border-l-2 border-reddit_text-darker p-3 ml-4"}>
+            <div className={"border-l-2 border-reddit_text-darker p-3 pb-0 ml-4"}>
               {comment.body}
               <div>
                 <Button
@@ -52,7 +52,7 @@ const Comments = (props) => {
                   />
                 )}
                 {replies.length > 0 && (
-                  <Comments comments={replies} />
+                  <Comments comments={props.comments} parentId={comment._id} />
                 )}
               </div>
             </div>
