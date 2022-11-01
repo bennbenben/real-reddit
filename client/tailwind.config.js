@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  darkMode: false,
   theme: {
     extend: {
       colors: {
+        reddit_orange: '#f54404',
+        reddit_red: '#f54404',
         reddit_dark: {
           DEFAULT: "#030303",
           brighter: "#1a1a1a",
@@ -18,6 +21,9 @@ module.exports = {
         }
       },
     },
+  },
+  variants: {
+    extend: {},
   },
   plugins: [],
 };

@@ -109,6 +109,12 @@ app.get('/comments', (req, res) => {
   });
 });
 
+app.get('/comments/root/:rootId', (req, res) => {
+  Comment.find({rootId:req.params.rootId}).sort({postedAt: -1}).then(comments => {
+    res.json(comments);
+  });
+});
+
 app.get('/comments/:id', (req, res) => {
   Comment.findById(req.params.id).then(comment => {
     res.json(comment);
@@ -123,8 +129,15 @@ app.post('/comments', (req, res) => {
   }
   getUserFromToken(token)
     .then(userInfo => {
-      const {title, body} = req.body;
-      const comment = new Comment({title,body,author:userInfo.username,postedAt:new Date(),});
+      const {title, body, parentId, rootId} = req.body;
+      const comment = new Comment({
+        title,
+        body,
+        author:userInfo.username,
+        postedAt:new Date(),
+        parentId,
+        rootId,
+      });
       comment.save().then(savedComment => {
         res.json(savedComment);
       }).catch(console.log)

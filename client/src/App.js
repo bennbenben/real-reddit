@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
-import AuthModal from "./components/AuthModal";
 import AuthModalContext from "./components/AuthModalContext";
 import UserContext from "./components/UserContext";
 import axios from "axios";
 import Routing from "./components/Routing";
-import PostFormModal from "./components/PostFormModal";
 import PostFormModalContext from "./components/PostFormModalContext";
 
 const App = () => {

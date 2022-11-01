@@ -23,4 +23,4 @@ const PostsListing = () => {
   )
 }
 
-export default PostsListing
+export default PostsListing;
