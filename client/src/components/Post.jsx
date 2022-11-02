@@ -14,7 +14,7 @@ const Post = (props) => {
   // console.log("props._id is: "+props._id)
 
   return (
-    <div className="px-6 text-reddit_text pb-4">
+    <div className="text-reddit_text pb-4">
       {props.open && (
         <div className={postClasses}>
           <PostContent {...props} />
