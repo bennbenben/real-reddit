@@ -7,12 +7,14 @@ import axios from "axios";
 import Routing from "./components/Routing";
 import PostFormModal from "./components/PostFormModal";
 import PostFormModalContext from "./components/PostFormModalContext";
+import RedirectContext from "./components/RedirectContext";
 
 const App = () => {
 
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showPostFormModal, setShowPostFormModal] = useState(false);
   const [user, setUser] = useState({});
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     axios.get("http://localhost:8080/user", {withCredentials: true})
@@ -35,7 +37,9 @@ const App = () => {
     <AuthModalContext.Provider value={{show: showAuthModal, setShow: setShowAuthModal}}>
       <PostFormModalContext.Provider value={{show: showPostFormModal, setShow: setShowPostFormModal}}>
         <UserContext.Provider value={{...user, logout, setUser}}>
-          <Routing />
+            <RedirectContext.Provider value={{redirect, setRedirect}}>
+              <Routing />
+            </RedirectContext.Provider>
         </UserContext.Provider>
       </PostFormModalContext.Provider>
     </AuthModalContext.Provider>

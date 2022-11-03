@@ -106,7 +106,7 @@ app.get('/comments', (req, res) => {
   const filters = search
     ? {body: {$regex: '.*'+search+'.*'}}
     : {rootId:null};
-  Comment.find({rootId:null}).sort({postedAt: -1}).then(comments => {
+  Comment.find(filters).sort({postedAt: -1}).then(comments => {
     res.json(comments);
   });
 });
@@ -147,8 +147,32 @@ app.post('/comments', (req, res) => {
     .catch(() => {
       res.sendStatus(401);
     })
-  
 })
+
+app.post('/deletepost', (req, res) => {
+  const token = req.cookies.token;
+  if (!token) {
+    res.sendStatus(401);
+    return;
+  }
+  getUserFromToken(token)
+    .then(userInfo => {
+      const {postId} = req.body;
+
+      Comment.findById(postId)
+        .then(comment => {
+          if (userInfo.username === comment.author) {
+            Comment.deleteMany({rootId: mongoose.Types.ObjectId.createFromHexString(postId)})
+              .then(response => console.log(response));
+            Comment.deleteOne({_id: mongoose.Types.ObjectId.createFromHexString(postId)})
+              .then(response => console.log(response));
+            res.sendStatus(202);
+          } else {
+            res.sendStatus(401);
+          }
+        });
+    });
+});
 
 // Health Check
 app.get("/health-check", (req, res) => {

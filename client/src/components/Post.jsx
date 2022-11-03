@@ -22,7 +22,9 @@ const Post = (props) => {
       )}
 
       {!props.open && (
-        <Link to={"/comments/" + props._id} state={{ commentId: props._id }} className={postClasses}>
+        <Link to={"/comments/" + (props.rootId || props._id)} 
+        state={{ commentId: (props.rootId || props._id) }} 
+        className={postClasses}>
           <PostContent {...props} />
         </Link>
       )}
