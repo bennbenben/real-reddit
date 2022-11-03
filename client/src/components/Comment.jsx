@@ -5,6 +5,7 @@ import Comments from "./Comments";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import Button from "./Button";
+import { CustomNavigate } from "./CustomNavigate";
 
 function Comment(props) {
 
@@ -12,6 +13,7 @@ function Comment(props) {
   const [comments,setComments] = useState([]);
   const [commentsTotals, setCommentsTotals] = useState(null);
   const [userVotes, setUserVotes] = useState(null);
+  const [deleteFlag, setDeleteFlag] = useState(false);
 
   function refreshComments() {
     axios.get('http://localhost:8080/comments/root/'+props.id)
@@ -34,7 +36,9 @@ function Comment(props) {
   const deletePost = () => {
     // console.log("this is props:" + props.id)
     axios.post("http://localhost:8080/deletepost",{postId:props.id}, {withCredentials:true})
-      .then();
+      .then(response => {
+        setDeleteFlag(true);
+      });
   }
 
   useEffect(() => {
@@ -53,6 +57,11 @@ function Comment(props) {
   useEffect(() => {
     refreshVotes();
   }, [comments.length]);
+
+  if (deleteFlag) {
+    window.location.reload();
+    // return (<CustomNavigate to={"/"} />);
+  }
 
   return (
     <>

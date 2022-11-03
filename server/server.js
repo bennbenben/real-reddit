@@ -162,9 +162,13 @@ app.post('/deletepost', (req, res) => {
       Comment.findById(postId)
         .then(comment => {
           if (userInfo.username === comment.author) {
-            console.log("inside if")
             Comment.deleteMany({rootId: mongoose.Types.ObjectId.createFromHexString(postId)})
               .then(response => console.log(response));
+            Comment.deleteOne({_id: mongoose.Types.ObjectId.createFromHexString(postId)})
+              .then(response => console.log(response));
+            res.sendStatus(202);
+          } else {
+            res.sendStatus(401);
           }
         });
 

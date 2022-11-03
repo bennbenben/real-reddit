@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Board from "./Board";
 import CommentModal from './CommentModal';
 import CommentPage from "./CommentPage";
+import SearchResultsPage from './SearchResultsPage';
 
 const RoutingRoutes = () => {
   const [postOpen, setPostOpen] = useState(false);
@@ -40,9 +41,10 @@ const RoutingRoutes = () => {
       <Routes location={location}>
         <Route path="/" element={<Board />} />
         <Route path="/comments/:id" element={<CommentPage />} />
+        <Route path="/search/:text" element={<SearchResultsPage />} />
       </Routes>
     </div>
   )
 }
 
-export default RoutingRoutes
+export default RoutingRoutes;
