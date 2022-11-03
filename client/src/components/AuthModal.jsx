@@ -23,7 +23,8 @@ const AuthModal = () => {
   const register = (e) => {
     e.preventDefault();
     const data = { email, username, password };
-    axios.post("http://localhost:8080/register", data, {withCredentials: true})
+    // axios.post("http://localhost:8080/register", data, {withCredentials: true})
+    axios.post("https://real-reddit-server.onrender.com/register", data, {withCredentials: true})
         .then(() => {
             user.setUser({username});
             modalContext.setShow(false);
