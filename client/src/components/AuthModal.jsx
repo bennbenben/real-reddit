@@ -23,8 +23,8 @@ const AuthModal = () => {
   const register = (e) => {
     e.preventDefault();
     const data = { email, username, password };
-    // axios.post("http://localhost:8080/register", data, {withCredentials: true})
-    axios.post("https://real-reddit-server.onrender.com/register", data, {withCredentials: true})
+    axios.post("http://localhost:8080/register", data, {withCredentials: true})
+    // axios.post("https://real-reddit-server.onrender.com/register", data, {withCredentials: true})
         .then(() => {
             user.setUser({username});
             modalContext.setShow(false);
@@ -36,8 +36,8 @@ const AuthModal = () => {
 
   const login = () => {
     const data = {username, password};
-    // axios.post("http://localhost:8080/login", data, {withCredentials: true})
-    axios.post("https://real-reddit-server.onrender.com/login", data, {withCredentials: true})
+    axios.post("http://localhost:8080/login", data, {withCredentials: true})
+    // axios.post("https://real-reddit-server.onrender.com/login", data, {withCredentials: true})
         .then(() => {
             modalContext.setShow(false);
             user.setUser({username});
@@ -47,7 +47,7 @@ const AuthModal = () => {
   return (
     <div className={"w-screen h-screen fixed top-0 left-0 z-30 flex content-center " + visibleClass} style={{backgroundColor:'rgba(0,0,0,.6'}}>
         <ClickOutHandler onClickOut={() => modalContext.setShow(false)}>
-            <div className="border border-reddit_dark-brightest w-3/4 md:2/4 bg-reddit_dark p-5 text-reddit_text self-center mx-auto rounded-xl">
+            <div className="border border-reddit_dark-brightest w-3/4 lg:2/4 bg-reddit_dark p-5 text-reddit_text self-center mx-auto rounded-xl">
                 
                 {modalType === 'login' && (
                     <h1 className="text-2xl mb-5">Login</h1>

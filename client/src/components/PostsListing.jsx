@@ -8,8 +8,8 @@ const PostsListing = () => {
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    // axios.get("http://localhost:8080/comments", {withCredentials: true})
-    axios.get("https://real-reddit-server.onrender.com/comments", {withCredentials: true})
+    axios.get("http://localhost:8080/comments", {withCredentials: true})
+    // axios.get("https://real-reddit-server.onrender.com/comments", {withCredentials: true})
     .then(response => {
       setComments(response.data)
     });

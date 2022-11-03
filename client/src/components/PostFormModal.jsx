@@ -22,8 +22,8 @@ const PostFormModal = () => {
 
   const createPost = () => {
     const data = {title, body}
-    // axios.post("http://localhost:8080/comments", data, {withCredentials: true})
-    axios.post("https://real-reddit-server.onrender.com/comments", data, {withCredentials: true})
+    axios.post("http://localhost:8080/comments", data, {withCredentials: true})
+    // axios.post("https://real-reddit-server.onrender.com/comments", data, {withCredentials: true})
       .then(response => {
         setNewPostId(response.data._id);
       })
