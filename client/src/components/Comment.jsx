@@ -11,7 +11,8 @@ function Comment(props) {
   const [comments,setComments] = useState([]);
 
   function refreshComments() {
-    axios.get('http://localhost:8080/comments/root/'+props.id)
+    // axios.get('http://localhost:8080/comments/root/'+props.id)
+    axios.get('https://real-reddit-server.onrender.com/comments/root/'+props.id)
       .then(response => {
         setComments(response.data);
       });
@@ -21,7 +22,8 @@ function Comment(props) {
     if (props.comment) {
       setComment(props.comment);
     } else {
-      axios.get('http://localhost:4000/comments/'+props.id)
+      // axios.get('http://localhost:8080/comments/'+props.id)
+      axios.get('https://real-reddit-server.onrender.com/comments/'+props.id)
         .then(response => {
           setComment(response.data);
         });

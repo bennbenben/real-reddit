@@ -15,6 +15,25 @@ Will need to refactor for better understanding
                           means the object is a post, instead of comment
                           each post onClick will link to <CommentModal>
       <CommentModal> --- opens specific post on homepage with specific ID /comment/:id
+                         same as <CommentPage>, except in a modal form
+                         useEffect to GET specific comment ./comment/:id
+                         pass specific comment to <Comment>
+        <Comment> --- useEffect to fetch all comments for a post
+                      GET request to ./comments/root/:id
+          <Post> ---- the specific post itself
+          <CommentForm> --- add a comment
+          <Comments> ---- useContext to provide the refreshComment function
+                          you have parentId and rootId
+                          you have all the comments for this rootId from <Comment>
+                          this level you filter comments for same parentId
+            <Comments> ---- recursion here, were we nest the same component <Comments>
+                            this time the parentId, instead of passing the postID
+                            we pass the ID of the parent comment
+
+
+      <CommentPage>
+
+        <Comment>
                          
 
       <CommentPage> ---- specific post page

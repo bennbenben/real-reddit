@@ -15,7 +15,8 @@ const App = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    axios.get("http://localhost:8080/user", {withCredentials: true})
+    // axios.get("http://localhost:8080/user", {withCredentials: true})
+    axios.get("https://real-reddit-server.onrender.com/user", {withCredentials: true})
       .then(response => {
         setUser(response.data);
       });
@@ -24,7 +25,8 @@ const App = () => {
   }, []);
 
   function logout () {
-    axios.post("http://localhost:8080/logout", {withCredentials: true})
+    // axios.post("http://localhost:8080/logout", {withCredentials: true})
+    axios.post("https://real-reddit-server.onrender.com/logout", {withCredentials: true})
       .then(setUser({}));
   }
 
