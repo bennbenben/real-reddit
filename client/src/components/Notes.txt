@@ -1,0 +1,33 @@
+Notes on how the components work.
+
+Will need to refactor for better understanding
+
+
+
+<App>
+  <Routing>
+    <Header>
+    <RoutingRoutes>
+      <Board> ----- homepage; showing all posts
+        <PostListing> --- useEffect API GET request to ./comments
+                          fetches all posts
+                          with {rootId:null} - no root ID 
+                          means the object is a post, instead of comment
+                          each post onClick will link to <CommentModal>
+      <CommentModal> --- opens specific post on homepage with specific ID /comment/:id
+                         
+
+      <CommentPage> ---- specific post page
+    <PostFormModal> --- create a post
+    <AuthModal> --- login/register
+
+
+## Comment and Threading
+Uses same modal as a post
+Attributes are:
+Author 
+Body - comment content/post content
+ParentId - refers to parent comment
+RootId - refers to the post
+
+When a page loads
