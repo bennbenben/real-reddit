@@ -51,7 +51,7 @@ app.post("/register", (req, res) => {
         console.log(err);
         res.sendStatus(500);
       } else {
-        res.status(201).cookie('token', token).send();
+        res.status(201).cookie('token', token, {sameSite: 'none', secure: true}).send();
       }
     });
   }).catch(e => {
@@ -84,7 +84,7 @@ app.post('/login', (req, res) => {
       const passOk = bcrypt.compareSync(password, user.password);
       if (passOk) {
         jwt.sign({id:user._id}, process.env.secret, (err, token) => {
-          res.cookie('token', token).send();
+          res.cookie('token', token, {sameSite: 'none', secure: true}).send();
         });
       } else {
         res.status(422).json("Invalid username or password");
@@ -96,7 +96,7 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/logout', (req, res) => {
-  res.cookie('token','').send();
+  res.cookie('token','', {sameSite: 'none', secure: true}).send();
 });
 
 app.get('/comments', (req, res) => {
