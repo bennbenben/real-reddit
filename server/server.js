@@ -9,6 +9,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "./models/User.js";
 import Comment from "./models/Comment.js";
+import VotingRoutes from "./VotingRoutes.js";
 
 // Constants
 const PORT = 8080;
@@ -26,6 +27,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(VotingRoutes);
 
 await mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
