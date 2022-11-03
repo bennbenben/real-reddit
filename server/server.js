@@ -106,7 +106,7 @@ app.get('/comments', (req, res) => {
   const filters = search
     ? {body: {$regex: '.*'+search+'.*'}}
     : {rootId:null};
-  Comment.find({rootId:null}).sort({postedAt: -1}).then(comments => {
+  Comment.find(filters).sort({postedAt: -1}).then(comments => {
     res.json(comments);
   });
 });
@@ -171,11 +171,6 @@ app.post('/deletepost', (req, res) => {
             res.sendStatus(401);
           }
         });
-
-      // 1. validate author
-      // 2. delete by rootId
-      // 3. delete by object id
-
     });
 });
 

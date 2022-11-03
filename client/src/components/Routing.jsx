@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AuthModal from "./AuthModal";
@@ -12,9 +13,11 @@ import RoutingRoutes from "./RoutingRoutes";
 const Routing = () => {
   const {redirect, setRedirect} = useContext(RedirectContext);
 
-  // if (redirect) {
-  //   return (<CustomNavigate to={redirect} />);
-  // }
+  useEffect(() => {
+    if (redirect) {
+      setRedirect(false);
+    }
+  }, [redirect]);
 
   return (
     <BrowserRouter>
