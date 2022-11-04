@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import CommunityContext from "./CommunityContext";
 
 const BoardHeader = () => {
@@ -11,7 +11,6 @@ const BoardHeader = () => {
   if (!name) {
     return null;
   }
-
   return (
     <>
       <div
