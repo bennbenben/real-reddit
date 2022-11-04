@@ -19,8 +19,8 @@ const SearchResultsPage = (props) => {
       });
   }, []);
 
-  console.log(('communities',communities))
-        console.log(('comments',comments))
+  // console.log(('communities',communities))
+  // console.log(('comments',comments))
 
   return (
     <div className="bg-reddit_dark">
