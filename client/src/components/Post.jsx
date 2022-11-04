@@ -1,8 +1,13 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import CommunityContext from "./CommunityContext";
 import PostContent from "./PostContent";
 
 const Post = (props) => {
+
+  const { community } = useContext(CommunityContext);
+
   let postClasses =
     "block border border-reddit_border bg-reddit_dark-brighter p-2 rounded-md " +
     (props.open ? "" : "hover:border-reddit_text cursor-pointer");
@@ -23,7 +28,10 @@ const Post = (props) => {
 
       {!props.open && (
         <Link to={"/comments/" + (props.rootId || props._id)} 
-        state={{ commentId: (props.rootId || props._id) }} 
+        state={{ 
+          commentId: (props.rootId || props._id),
+          source: community 
+        }} 
         className={postClasses}>
           <PostContent {...props} />
         </Link>

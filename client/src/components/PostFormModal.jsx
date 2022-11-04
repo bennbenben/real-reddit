@@ -8,11 +8,13 @@ import Input from './Input';
 import TextArea from './TextArea';
 import AuthModalContext from './AuthModalContext';
 import { CustomNavigate } from './CustomNavigate';
+import CommunityContext from './CommunityContext';
 
 const PostFormModal = () => {
 
   const modalContext = useContext(PostFormModalContext);
   const authModalContext = useContext(AuthModalContext);
+  const {community} = useContext(CommunityContext);
 
   const visibleClass = modalContext.show ? "block" : "hidden";
   
@@ -21,8 +23,8 @@ const PostFormModal = () => {
   const [newPostId, setNewPostId] = useState(null);
 
   const createPost = () => {
-    const data = {title, body}
-    axios.post("http://localhost:8080/comments", data, {withCredentials: true})
+    const data = {title, body, community};
+    axios.post("/comments", data, {withCredentials: true})
     // axios.post("https://real-reddit-server.onrender.com/comments", data, {withCredentials: true})
       .then(response => {
         setNewPostId(response.data._id);

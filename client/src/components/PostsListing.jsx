@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import axios from "axios";
 import Post from './Post'
 import { useState, useEffect } from 'react'
+import CommunityContext from './CommunityContext';
 
 const PostsListing = () => {
 
   const [comments, setComments] = useState([]);
+  const {community} = useContext(CommunityContext);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/comments", {withCredentials: true})
-    // axios.get("https://real-reddit-server.onrender.com/comments", {withCredentials: true})
+    let url = "/comments";
+    // let url = "https://real-reddit-server.onrender.com/comments";
+    if (community) {
+      url += "?community=" + community;
+    }
+    axios.get(url, {withCredentials: true})
     .then(response => {
       setComments(response.data)
     });
-  }, []);
+  }, [community]);
   
   return (
     <div className="bg-reddit_dark">

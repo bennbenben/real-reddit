@@ -10,6 +10,8 @@ import jwt from "jsonwebtoken";
 import User from "./models/User.js";
 import Comment from "./models/Comment.js";
 import VotingRoutes from "./VotingRoutes.js";
+import CommunityRoutes from "./CommunityRoutes.js";import Community from "./models/Community.js";
+;
 
 // Constants
 const PORT = 8080;
@@ -28,6 +30,7 @@ app.use(
   })
 );
 app.use(VotingRoutes);
+app.use(CommunityRoutes);
 
 await mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -102,12 +105,26 @@ app.post('/logout', (req, res) => {
 });
 
 app.get('/comments', (req, res) => {
-  const search = req.query.search;
-  const filters = search
+  const {search, community} = req.query;
+  let filters = search
     ? {body: {$regex: '.*'+search+'.*'}}
     : {rootId:null};
+
+  if (community) {
+    filters.community = community;
+  } 
   Comment.find(filters).sort({postedAt: -1}).then(comments => {
     res.json(comments);
+  });
+});
+
+app.get('/search', (req, res) => {
+  const {phrase, community} = req.query;
+
+  Comment.find({body: {$regex: '.*'+phrase+'.*'}}).sort({postedAt: -1}).then(comments => {
+    Community.find({name:{$regex: '.*'+phrase+'.*'}}).then(communities => {
+      res.json({comments, communities});
+    })
   });
 });
 
@@ -131,7 +148,7 @@ app.post('/comments', (req, res) => {
   }
   getUserFromToken(token)
     .then(userInfo => {
-      const {title,body,parentId,rootId} = req.body;
+      const {title,body,parentId,rootId, community} = req.body;
       const comment = new Comment({
         title,
         body,
@@ -139,6 +156,7 @@ app.post('/comments', (req, res) => {
         postedAt:new Date(),
         parentId,
         rootId,
+        community,
       });
       comment.save().then(savedComment => {
         res.json(savedComment);

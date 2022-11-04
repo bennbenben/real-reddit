@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AuthModal from "./AuthModal";
+import CommunityFormModal from "./CommunityFormModal";
 import { CustomNavigate } from "./CustomNavigate";
 import Header from "./Header";
 import PostFormModal from "./PostFormModal";
@@ -29,6 +30,7 @@ const Routing = () => {
           <Header />
           <RoutingRoutes />
           <PostFormModal />
+          <CommunityFormModal />
           <AuthModal />
         </>
       )}

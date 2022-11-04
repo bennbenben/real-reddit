@@ -19,9 +19,14 @@ import AuthModalContext from "./AuthModalContext";
 import UserContext from "./UserContext";
 import { Link } from "react-router-dom";
 import RedirectContext from "./RedirectContext";
+import PostFormModalContext from "./PostFormModalContext";
+import CommunityContext from "./CommunityContext";
 
 const Header = () => {
   const [userDropDownVisibilityClass, setUserDropDownVisibilityClass] = useState('hidden');
+  const [plusDropDownVisibilityClass, setPlusDropDownVisibilityClass] = useState('hidden');
+  const {setShow: setShowPost} = useContext(PostFormModalContext)
+  const {setShow: setShowCommunity} = useContext(CommunityContext);
   const [searchText, setSearchText] = useState("");
   const {setRedirect} = useContext(RedirectContext);
   
@@ -68,9 +73,35 @@ const Header = () => {
             <button className="px-2 py-1">
               <BellIcon className="text-gray-400 w-6 h-6 mx-2" />
             </button>
-            <button className="px-2 py-1">
-              <PlusIcon className="text-gray-400 w-6 h-6 mx-2" />
-            </button>
+            <ClickOutHandler onClickOut={() => setPlusDropDownVisibilityClass('hidden')}>
+              <button className="px-2 py-1" onClick={() => setPlusDropDownVisibilityClass('block')}>
+                <PlusIcon className="text-gray-400 w-6 h-6 mx-2" />
+              </button>
+
+              <div className="relative">
+                <div className={"absolute right-0 bg-reddit_dark border border-gray-700 z-10 rounded-md text-reddit_text overflow-hidden " + plusDropDownVisibilityClass}
+                style={{width: '250px'}}>
+                  <button className="block flex w-full py-2 px-3 hover:bg-gray-300 hover:text-black text-sm" 
+                  onClick={() => {
+                    setShowPost(true);
+                    setPlusDropDownVisibilityClass('hidden');
+                  }}>
+                    <PlusIcon className="w-5 h-5 mr-2" />
+                    Create post
+                  </button>
+
+                  <button className="block flex w-full py-2 px-3 hover:bg-gray-300 hover:text-black text-sm" 
+                  onClick={() => {
+                    setShowCommunity(true);
+                    setPlusDropDownVisibilityClass('hidden');
+                  }}>
+                    <PlusIcon className="w-5 h-5 mr-2" />
+                    Create new community
+                  </button>
+                </div>
+              </div>
+
+            </ClickOutHandler>
           </>
         )}
 

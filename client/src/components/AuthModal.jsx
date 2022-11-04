@@ -23,7 +23,7 @@ const AuthModal = () => {
   const register = (e) => {
     e.preventDefault();
     const data = { email, username, password };
-    axios.post("http://localhost:8080/register", data, {withCredentials: true})
+    axios.post("/register", data, {withCredentials: true})
     // axios.post("https://real-reddit-server.onrender.com/register", data, {withCredentials: true})
         .then(() => {
             user.setUser({username});
@@ -36,7 +36,7 @@ const AuthModal = () => {
 
   const login = () => {
     const data = {username, password};
-    axios.post("http://localhost:8080/login", data, {withCredentials: true})
+    axios.post("/login", data, {withCredentials: true})
     // axios.post("https://real-reddit-server.onrender.com/login", data, {withCredentials: true})
         .then(() => {
             modalContext.setShow(false);

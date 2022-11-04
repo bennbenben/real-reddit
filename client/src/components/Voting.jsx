@@ -21,7 +21,7 @@ function Voting(props) {
     if (directionNumber === userVote) {
       direction = 'unvote';
     }
-    const url = 'http://localhost:8080/vote/'+props.commentId+'/'+direction;
+    const url = '/vote/'+props.commentId+'/'+direction;
     // const url = 'https://real-reddit-server.onrender.com/vote/'+props.commentId+'/'+direction;
     axios.get(url, {withCredentials:true})
       .then(() => {

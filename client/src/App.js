@@ -8,6 +8,11 @@ import Routing from "./components/Routing";
 import PostFormModal from "./components/PostFormModal";
 import PostFormModalContext from "./components/PostFormModalContext";
 import RedirectContext from "./components/RedirectContext";
+// import { CommunityContextProvider } from "./components/CommunityContext";
+import CommunityContext from "./components/CommunityContext";
+
+// axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = "https://real-reddit-server.onrender.com/";
 
 const App = () => {
 
@@ -16,8 +21,25 @@ const App = () => {
   const [user, setUser] = useState({});
   const [redirect, setRedirect] = useState(false);
 
+  // Subreddit
+  const [show, setShow] = useState(false);
+  const [community, setCommunity] = useState();
+  const [communityInfo, setCommunityInfo] = useState({});
+
+  useEffect( () => {
+    if (!community) {
+      setCommunityInfo({});
+      return;
+    }
+    axios.get(`/communities/${community}`, {withCredentials: true})
+    // axios.get(`https://real-reddit-server.onrender.com/communities/${community}`, {withCredentials: true})
+      .then(response => {
+        setCommunityInfo(response.data);
+      })
+  }, [community])
+
   useEffect(() => {
-    axios.get("http://localhost:8080/user", {withCredentials: true})
+    axios.get("/user", {withCredentials: true})
     // axios.get("https://real-reddit-server.onrender.com/user", {withCredentials: true})
       .then(response => {
         setUser(response.data);
@@ -27,7 +49,7 @@ const App = () => {
   }, []);
 
   function logout () {
-    axios.post("http://localhost:8080/logout", {withCredentials: true})
+    axios.post("/logout", {withCredentials: true})
     // axios.post("https://real-reddit-server.onrender.com/logout", {withCredentials: true})
       .then(setUser({}));
   }
@@ -36,11 +58,13 @@ const App = () => {
   return (
     <AuthModalContext.Provider value={{show: showAuthModal, setShow: setShowAuthModal}}>
       <PostFormModalContext.Provider value={{show: showPostFormModal, setShow: setShowPostFormModal}}>
-        <UserContext.Provider value={{...user, logout, setUser}}>
-            <RedirectContext.Provider value={{redirect, setRedirect}}>
-              <Routing />
-            </RedirectContext.Provider>
-        </UserContext.Provider>
+        <CommunityContext.Provider value={{show,setShow, community, setCommunity, ...communityInfo}}>
+          <UserContext.Provider value={{...user, logout, setUser}}>
+              <RedirectContext.Provider value={{redirect, setRedirect}}>
+                <Routing />
+              </RedirectContext.Provider>
+          </UserContext.Provider>
+        </CommunityContext.Provider>
       </PostFormModalContext.Provider>
     </AuthModalContext.Provider>
   );

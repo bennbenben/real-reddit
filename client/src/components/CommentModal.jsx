@@ -13,7 +13,7 @@ const CommentModal = (props) => {
   const visibleClass = props.open ? 'block' : 'hidden';
 
   useEffect(() => {
-    axios.get('http://localhost:8080/comments/'+props.id)
+    axios.get('/comments/'+props.id)
     // axios.get('https://real-reddit-server.onrender.com/comments/'+props.id)
       .then(response => {
         setComment(response.data);

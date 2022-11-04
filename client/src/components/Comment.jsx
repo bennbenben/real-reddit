@@ -16,7 +16,7 @@ function Comment(props) {
   const [deleteFlag, setDeleteFlag] = useState(false);
 
   function refreshComments() {
-    axios.get('http://localhost:8080/comments/root/'+props.id)
+    axios.get('/comments/root/'+props.id)
     // axios.get('https://real-reddit-server.onrender.com/comments/root/'+props.id)
       .then(response => {
         setComments(response.data);
@@ -25,7 +25,7 @@ function Comment(props) {
 
   function refreshVotes() {
     const commentsIds = [comment._id, ...comments.map(c => c._id) ];
-    axios.post('http://localhost:8080/votes', {commentsIds}, {withCredentials:true})
+    axios.post('/votes', {commentsIds}, {withCredentials:true})
     // axios.post('https://real-reddit-server.onrender.com/votes', {commentsIds}, {withCredentials:true})
       .then(response => {
         setCommentsTotals(response.data.commentsTotals);
@@ -35,7 +35,7 @@ function Comment(props) {
 
   const deletePost = () => {
     // console.log("this is props:" + props.id)
-    axios.post("http://localhost:8080/deletepost",{postId:props.id}, {withCredentials:true})
+    axios.post("/deletepost",{postId:props.id}, {withCredentials:true})
       .then(response => {
         setDeleteFlag(true);
       });
@@ -45,7 +45,7 @@ function Comment(props) {
     if (props.comment) {
       setComment(props.comment);
     } else {
-      axios.get('http://localhost:8080/comments/'+props.id)
+      axios.get('/comments/'+props.id)
       // axios.get('https://real-reddit-server.onrender.com/comments/'+props.id)
         .then(response => {
           setComment(response.data);
