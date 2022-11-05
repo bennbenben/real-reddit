@@ -8,7 +8,6 @@ a social media clone
 - Votes
 
 # Issues faced
-- Covid / time
 - not much notes for react router v6 (alot of solutions are for v5 which do not work anymore)
 - react States are slow
 - props drilling -> so went to useContext
