@@ -12,7 +12,8 @@ a social media clone
 - not much notes for react router v6 (alot of solutions are for v5 which do not work anymore)
 - react States are slow
 - props drilling -> so went to useContext
-- [tailwind utility classes](https://github.com/bennbenben/real-reddit/blob/main/client/tailwind.config.js) are great 
+- css is frustrating
+- [tailwind utility classes](https://github.com/bennbenben/real-reddit/blob/main/client/tailwind.config.js) are great
 
 # Tech Stack
 MERN 
